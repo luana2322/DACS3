@@ -34,11 +34,12 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void deteleById(Long id) {
+    projectRepository.deleteById(id);
     }
 
     @Override
     public Project save(Project project) {
-        return null;
+        return projectRepository.save(project);
     }
 
     @Override
