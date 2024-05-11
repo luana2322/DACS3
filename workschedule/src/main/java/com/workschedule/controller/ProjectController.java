@@ -2,6 +2,7 @@ package com.workschedule.controller;
 
 import com.workschedule.model.Project;
 import com.workschedule.model.Role;
+import com.workschedule.model.Task;
 import com.workschedule.repository.ProjectRepository;
 import com.workschedule.service.serviceImpl.ProjectServiceImpl;
 import org.apache.poi.ss.formula.functions.T;
@@ -39,4 +40,11 @@ public class ProjectController {
         projectServiceImpl.deteleById(projectid);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/getprjectbymanageid")
+    public ResponseEntity<List<Project>> gettaskbyprojectid(@RequestParam("projectid") Long manageId) {
+
+        return ResponseEntity.ok(projectRepository.findProjectByManage(manageId));
+    }
+
 }

@@ -26,6 +26,7 @@ public class Project {
     private long project_id;
     private String project_name;
     private String projectStatus;
+    private Long manageId;
     private Date timeStart;
     private Date timeEnd;
     private String projectDescription;

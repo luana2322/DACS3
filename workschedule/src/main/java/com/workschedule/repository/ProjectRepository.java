@@ -1,5 +1,6 @@
 package com.workschedule.repository;
 import com.workschedule.model.Project;
+import com.workschedule.model.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,4 +22,11 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
             + "           \r\n"
             + "         group by a.project_id ",nativeQuery = true)
     List<Project> searchproject(String keyword);
+
+
+    @Query(value="select c.* \r\n"
+            + "			from project c \r\n"
+            + "         where c.manageId=?1 ",nativeQuery = true)
+    List<Project> findProjectByManage(Long manageId);
+
 }
