@@ -29,4 +29,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
             + "         where c.manageId=?1 ",nativeQuery = true)
     List<Project> findProjectByManage(Long manageId);
 
+
+
+
 }

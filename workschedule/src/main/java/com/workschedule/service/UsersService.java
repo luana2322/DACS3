@@ -1,5 +1,6 @@
 package com.workschedule.service;
 
+import com.workschedule.dto.UserDto;
 import com.workschedule.model.Users;
 
 import java.util.List;
@@ -11,7 +12,11 @@ public interface UsersService {
 
     void deteleById(Long id);
 
-    Users save(Users users);
+
+    Users save(UserDto userDto);
 
     Users update(Users users);
+
+    boolean login(UserDto userDto);
+
 }
