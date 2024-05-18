@@ -1,6 +1,6 @@
 package com.workschedule.service.serviceImpl;
 
-import com.workschedule.model.User_Role;
+import com.workschedule.model.User_Project;
 import com.workschedule.repository.UserRoleRepository;
 import com.workschedule.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,20 +12,20 @@ import java.util.List;
 public class UserRoleServiceImpl implements UserRoleService {
     @Autowired
     private UserRoleRepository userRoleRepository;
-    List<User_Role> userRoleList;
+    List<User_Project> userRoleList;
 
 
 
     @Override
-    public List<User_Role> findAll() {
+    public List<User_Project> findAll() {
         this.userRoleList = this.userRoleRepository.findAll();
         return this.userRoleList;
     }
 
     @Override
-    public User_Role findById(Long id) {
+    public User_Project findById(Long id) {
         if (this.userRoleRepository.existsById(id)) {
-            User_Role userRole = (User_Role)this.userRoleRepository.findById(id).get();
+            User_Project userRole = (User_Project)this.userRoleRepository.findById(id).get();
             return userRole;
         } else {
             return null;
@@ -37,12 +37,12 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    public User_Role save(User_Role userTask) {
+    public User_Project save(User_Project userTask) {
         return null;
     }
 
     @Override
-    public User_Role update(User_Role userTask) {
+    public User_Project update(User_Project userTask) {
         return null;
     }
 }

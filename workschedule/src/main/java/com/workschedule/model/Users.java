@@ -35,14 +35,17 @@ public class Users implements UserDetails {
     private String lastName;
     private String image;
     private Date created;
-    @ManyToOne(
-            fetch = FetchType.EAGER
-    )
-    @JoinColumn(
-            name = "department_id",
-            referencedColumnName = "department_id"
-    )
-    private Department department;
+
+//    @ManyToOne(
+//            fetch = FetchType.EAGER
+//    )
+//    @JoinColumn(
+//            name = "department_id",
+//            referencedColumnName = "department_id"
+//    )
+//    private Department department;
+
+
     @OneToOne(
             cascade = {CascadeType.ALL}
     )
@@ -55,10 +58,27 @@ public class Users implements UserDetails {
             mappedBy = "users"
     )
     private List<User_Task> userTaskList;
+
+//    @OneToMany(
+//            mappedBy = "users"
+//    )
+//    private List<User_Role> userRoleList;
+
     @OneToMany(
             mappedBy = "users"
     )
-    private List<User_Role> userRoleList;
+    private List<Comment> commentList;
+
+    @OneToMany(
+            mappedBy = "users"
+    )
+    private List<UserNote> userNotes;
+
+    @OneToMany(
+            mappedBy = "users"
+    )
+    private List<User_Project> userProjectList;
+
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

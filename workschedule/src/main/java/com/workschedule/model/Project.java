@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @Setter
 @Getter
@@ -38,4 +40,10 @@ public class Project {
             referencedColumnName = "user_id"
     )
     private Users manage_id;
+
+
+    @OneToMany(
+            mappedBy = "project"
+    )
+    private List<User_Project> userProjectList;
 }

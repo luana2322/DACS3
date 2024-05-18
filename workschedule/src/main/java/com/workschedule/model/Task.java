@@ -42,4 +42,10 @@ public class Task {
             referencedColumnName = "project_id"
     )
     private Project project;
+
+    @OneToMany(
+            mappedBy = "task"
+    )
+    private List<Comment> commentList;
+
 }

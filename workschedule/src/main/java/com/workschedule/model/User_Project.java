@@ -12,22 +12,22 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(
-        name = "user_role"
+        name = "user_project"
 )
-public class User_Role {
+public class User_Project {
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    private long user_role_id;
+    private long user_project_id;
     @ManyToOne(
             fetch = FetchType.EAGER
     )
     @JoinColumn(
-            name = "role_id",
-            referencedColumnName = "role_id"
+            name = "project_id",
+            referencedColumnName = "project_id"
     )
-    private Role role;
+    private Project project;
     @ManyToOne(
             fetch = FetchType.EAGER
     )
@@ -36,4 +36,13 @@ public class User_Role {
             referencedColumnName = "user_id"
     )
     private Users users;
+
+    @OneToOne(
+            cascade = {CascadeType.ALL}
+    )
+    @JoinColumn(
+            name = "role_id",
+            referencedColumnName = "role_id"
+    )
+    private Role role;
 }

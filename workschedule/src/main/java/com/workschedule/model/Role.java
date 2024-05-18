@@ -29,8 +29,16 @@ public class Role {
     private String description;
     private Date createdAt;
     private Date updatedAt;
-    @OneToMany(
-            mappedBy = "role"
+
+
+    @OneToOne(
+            cascade = {CascadeType.ALL}
     )
-    private List<User_Role> userRoleList;
+    @JoinColumn(
+            name = "user_project_id",
+            referencedColumnName = "user_project_id"
+    )
+    private User_Project userProject;
+
+
 }

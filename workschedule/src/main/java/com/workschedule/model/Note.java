@@ -6,30 +6,31 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
+
 @Entity
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(
-        name = "department"
-)
-public class Department {
+@Table(name = "note")
+public class Note {
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
     @Column(
-            name = "department_id"
+            name = "note_id"
     )
-    private int department_id;
-    private String department_name;
-    private String description;
-    private LocalDateTime created_At;
+    private long note_id;
+    private String title;
+    private String content;
+    private Date date;
+
     @OneToMany(
-            mappedBy = "department"
+            mappedBy = "note"
     )
-    private List<Users> userList;
+    private List<UserNote> userNotes;
+
 }
