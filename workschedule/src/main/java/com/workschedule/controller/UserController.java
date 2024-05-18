@@ -1,5 +1,6 @@
 package com.workschedule.controller;
 
+import com.workschedule.Exception.NotFoundException;
 import com.workschedule.dto.UserDto;
 import com.workschedule.model.Users;
 import com.workschedule.service.serviceImpl.UserServiceImpl;
@@ -27,12 +28,8 @@ public class UserController {
 }
 
 @GetMapping("/login")
-    public ResponseEntity<Boolean> login(@RequestBody UserDto userDto){
-    if(userServiceImpl.login(userDto)){
-        return ResponseEntity.ok(true);
-    }else{
-        return ResponseEntity.ok(false);
-    }
+    public Users login(@RequestBody UserDto userDto) throws NotFoundException {
+    return userServiceImpl.login(userDto);
 }
 
 }

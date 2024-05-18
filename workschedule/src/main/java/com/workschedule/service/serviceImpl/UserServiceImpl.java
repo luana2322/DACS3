@@ -1,5 +1,7 @@
 package com.workschedule.service.serviceImpl;
 
+import com.workschedule.Exception.NotFoundException;
+import com.workschedule.Exception.ResourceNotFoundException;
 import com.workschedule.dto.UserDto;
 import com.workschedule.model.Users;
 import com.workschedule.repository.UsersRepository;
@@ -50,14 +52,14 @@ private UsersRepository usersRepository;
     }
 
     @Override
-    public boolean login(UserDto userDto) {
+    public Users login(UserDto userDto) throws NotFoundException {
         List<Users> usersList=findAll();
         for (Users user : usersList) {
             if(user.getEmail().equals(userDto.getEmaildto())
             &&user.getPassword().equals(userDto.getPassworddto())){
-                return true;
+                return user;
             }
         }
-        return false;
+        throw new ResourceNotFoundException("User with emai "+userDto.getEmaildto()+"not found!!!");
     }
 }

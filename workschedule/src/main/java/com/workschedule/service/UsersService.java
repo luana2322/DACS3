@@ -1,5 +1,6 @@
 package com.workschedule.service;
 
+import com.workschedule.Exception.NotFoundException;
 import com.workschedule.dto.UserDto;
 import com.workschedule.model.Users;
 
@@ -17,6 +18,6 @@ public interface UsersService {
 
     Users update(Users users);
 
-    boolean login(UserDto userDto);
+    Users login(UserDto userDto) throws NotFoundException;
 
 }
