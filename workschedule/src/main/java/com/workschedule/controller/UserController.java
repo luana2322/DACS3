@@ -20,9 +20,9 @@ public class UserController {
 @PostMapping("/register")
     public ResponseEntity<Users> register(@RequestBody @Valid UserDto userDto
         ,BindingResult bindingResult ) throws Exception {
-if (bindingResult.hasErrors()){
-    throw new  Exception("Wrong data");
-}
+//if (bindingResult.hasErrors()){
+//    throw new  Exception("Wrong data");
+//}
     return ResponseEntity.ok(userServiceImpl.save(userDto));
 }
 
