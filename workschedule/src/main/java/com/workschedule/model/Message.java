@@ -1,10 +1,7 @@
 package com.workschedule.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +13,7 @@ import java.util.List;
 @Table(
         name = "message"
 )
+@ToString
 public class Message {
     @Id
     @GeneratedValue(
@@ -25,7 +23,11 @@ public class Message {
             name = "message_id"
     )
     private long message_id;
-    private String message_content;
+    private String senderName;
+    private String message;
+    private String receiverName;
+    private String date;
+    private Status status;
     private Date created_At;
     private Date updated_At;
     @OneToMany(
