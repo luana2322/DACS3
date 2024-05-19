@@ -39,10 +39,22 @@ private UsersRepository usersRepository;
     @Override
     public Users save(UserDto userDto) {
         Users users=new Users();
+
+        List<Users> usersList=usersRepository.findAll();
+
+        for (Users user : usersList) {
+            if(user.getEmail().equals(userDto.getEmaildto())){
+                throw new ResourceNotFoundException("Email already exists.");
+            }
+        }
+
+         if(userDto.getUserName().equals(userDto.getEmaildto())){
+    throw new ResourceNotFoundException("Username and email must not be the same.");
+        }
+
         users.setEmail(userDto.getEmaildto());
         users.setPassword(userDto.getPassworddto());
-        users.setFirstName(userDto.getFirstName());
-        users.setLastName(userDto.getLastName());
+        users.setUserName(userDto.getUserName());
         return usersRepository.save(users);
     }
 
@@ -54,6 +66,9 @@ private UsersRepository usersRepository;
     @Override
     public Users login(UserDto userDto) throws NotFoundException {
         List<Users> usersList=findAll();
+
+
+
         for (Users user : usersList) {
             if(user.getEmail().equals(userDto.getEmaildto())
             &&user.getPassword().equals(userDto.getPassworddto())){

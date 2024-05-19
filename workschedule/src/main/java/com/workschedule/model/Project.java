@@ -26,20 +26,12 @@ public class Project {
             name = "project_id"
     )
     private long project_id;
-    private String project_name;
+    private String projectName;
     private String projectStatus;
-    private Long manageId;
+    private Long projectowner;
     private Date timeStart;
     private Date timeEnd;
     private String projectDescription;
-    @ManyToOne(
-            fetch = FetchType.EAGER
-    )
-    @JoinColumn(
-            name = "user_id",
-            referencedColumnName = "user_id"
-    )
-    private Users manage_id;
 
 
     @OneToMany(

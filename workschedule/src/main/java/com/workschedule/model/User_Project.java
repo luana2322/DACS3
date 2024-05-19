@@ -37,12 +37,8 @@ public class User_Project {
     )
     private Users users;
 
-    @OneToOne(
+    @OneToOne(mappedBy = "userProject",
             cascade = {CascadeType.ALL}
-    )
-    @JoinColumn(
-            name = "role_id",
-            referencedColumnName = "role_id"
     )
     private Role role;
 }

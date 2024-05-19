@@ -31,10 +31,8 @@ public class Users implements UserDetails {
     private long user_id;
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
+    private String userName;
     private String image;
-    private Date created;
 
 //    @ManyToOne(
 //            fetch = FetchType.EAGER

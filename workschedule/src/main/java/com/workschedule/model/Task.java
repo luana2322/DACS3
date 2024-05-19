@@ -26,6 +26,7 @@ public class Task {
     )
     private long task_id;
     private String taskName;
+    private String description;
     private Date timeStart;
     private Date timeEnd;
     private Date deadline;

@@ -31,14 +31,8 @@ public class Role {
     private Date updatedAt;
 
 
-    @OneToOne(
-            cascade = {CascadeType.ALL}
-    )
-    @JoinColumn(
-            name = "user_project_id",
-            referencedColumnName = "user_project_id"
-    )
+
+    @OneToOne
+    @JoinColumn(name = "user_project_id", unique = true)
     private User_Project userProject;
-
-
 }
