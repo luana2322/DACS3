@@ -72,6 +72,7 @@ private UsersRepository usersRepository;
         for (Users user : usersList) {
             if(user.getEmail().equals(userDto.getEmaildto())
             &&user.getPassword().equals(userDto.getPassworddto())){
+                user.setUserProjectList(null);
                 return user;
             }
         }
