@@ -33,7 +33,7 @@ private NoteRepository noteRepository;
 
     @Override
     public void deteleById(Long id) {
-
+        noteRepository.deleteById(id);
     }
 
     @Override

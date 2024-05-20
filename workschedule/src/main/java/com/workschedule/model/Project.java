@@ -31,7 +31,7 @@ public class Project {
     private String projectStatus;
     private Long projectowner;
     private LocalDate timeStart;
-    private Date timeEnd;
+    private LocalDate timeEnd;
     private String projectDescription;
 
 
