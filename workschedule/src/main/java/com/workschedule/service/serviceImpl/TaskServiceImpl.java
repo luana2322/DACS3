@@ -1,5 +1,6 @@
 package com.workschedule.service.serviceImpl;
 
+import com.workschedule.Exception.ResourceNotFoundException;
 import com.workschedule.model.Task;
 import com.workschedule.repository.TaskRepository;
 import com.workschedule.service.TaskService;
@@ -28,7 +29,7 @@ public class TaskServiceImpl implements TaskService {
             Task task = (Task)this.taskRepository.findById(id).get();
             return task;
         } else {
-            return null;
+            throw new ResourceNotFoundException("Cannot find task with id:"+id);
         }
     }
 

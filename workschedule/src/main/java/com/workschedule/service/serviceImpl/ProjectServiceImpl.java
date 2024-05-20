@@ -1,5 +1,6 @@
 package com.workschedule.service.serviceImpl;
 
+import com.workschedule.Exception.ResourceNotFoundException;
 import com.workschedule.model.Project;
 import com.workschedule.repository.ProjectRepository;
 import com.workschedule.service.ProjectService;
@@ -28,7 +29,7 @@ public class ProjectServiceImpl implements ProjectService {
             Project project = (Project)this.projectRepository.findById(id).get();
             return project;
         } else {
-            return null;
+            throw new ResourceNotFoundException("Cannot find project with id:"+id);
         }
     }
 

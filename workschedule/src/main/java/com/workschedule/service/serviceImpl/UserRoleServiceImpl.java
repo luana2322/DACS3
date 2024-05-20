@@ -1,5 +1,6 @@
 package com.workschedule.service.serviceImpl;
 
+import com.workschedule.Exception.ResourceNotFoundException;
 import com.workschedule.model.User_Project;
 import com.workschedule.repository.UserRoleRepository;
 import com.workschedule.service.UserRoleService;
@@ -28,7 +29,7 @@ public class UserRoleServiceImpl implements UserRoleService {
             User_Project userRole = (User_Project)this.userRoleRepository.findById(id).get();
             return userRole;
         } else {
-            return null;
+            throw new ResourceNotFoundException("Cannot find user_role with id:"+id);
         }
     }
 

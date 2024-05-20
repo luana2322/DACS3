@@ -1,5 +1,6 @@
 package com.workschedule.service.serviceImpl;
 
+import com.workschedule.Exception.ResourceNotFoundException;
 import com.workschedule.model.Role;
 import com.workschedule.repository.RoleRepository;
 import com.workschedule.service.RoleService;
@@ -28,7 +29,7 @@ public class RoleServiceImpl implements RoleService {
             Role role = (Role)this.roleRepository.findById(id).get();
             return role;
         } else {
-            return null;
+            throw new ResourceNotFoundException("Cannot find role with id:"+id);
         }
     }
 

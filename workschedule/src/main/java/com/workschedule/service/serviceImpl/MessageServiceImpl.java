@@ -1,5 +1,6 @@
 package com.workschedule.service.serviceImpl;
 
+import com.workschedule.Exception.ResourceNotFoundException;
 import com.workschedule.model.Message;
 import com.workschedule.repository.MessageRepository;
 import com.workschedule.service.MessageService;
@@ -27,7 +28,7 @@ public class MessageServiceImpl implements MessageService {
             Message message = (Message)this.messageRepository.findById(id).get();
             return message;
         } else {
-            return null;
+            throw new ResourceNotFoundException("Cannot find message with id:"+id);
         }
     }
 
