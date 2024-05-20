@@ -1,10 +1,7 @@
 package com.workschedule.controller;
 
 import com.workschedule.Exception.ResourceNotFoundException;
-import com.workschedule.model.Project;
-import com.workschedule.model.Role;
-import com.workschedule.model.Task;
-import com.workschedule.model.User_Project;
+import com.workschedule.model.*;
 import com.workschedule.repository.ProjectRepository;
 import com.workschedule.service.serviceImpl.ProjectServiceImpl;
 import com.workschedule.service.serviceImpl.UserProjectServiceimpl;
@@ -35,6 +32,7 @@ public class ProjectController {
     @PostMapping("/createdproject")
     public ResponseEntity<Project> addproject(@RequestBody Project project
             , @RequestParam("userId") Long userId) {
+        project.setProjectStatus(ProjectStatus.TODO.toString());
         Project projectsaved = projectServiceImpl.save(project);
  //dcm
         User_Project userProject = new User_Project();

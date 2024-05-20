@@ -27,7 +27,7 @@ public class UserController {
     return ResponseEntity.ok(userServiceImpl.save(userDto));
 }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Users login(@RequestBody UserDto userDto) throws NotFoundException {
         return userServiceImpl.logintest(userDto);
     }

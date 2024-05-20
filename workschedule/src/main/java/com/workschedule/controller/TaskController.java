@@ -1,6 +1,7 @@
 package com.workschedule.controller;
 
 import com.workschedule.model.Task;
+import com.workschedule.model.TaskStatus;
 import com.workschedule.repository.TaskRepository;
 import com.workschedule.service.serviceImpl.TaskServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ private TaskRepository taskRepository;
 
     @PostMapping("/addtask")
     public ResponseEntity<Task> addconversation(@RequestBody Task task) {
+       task.setTaskStatus(TaskStatus.TODO.toString());
         return ResponseEntity.ok(taskServiceImpl.save(task));
     }
 
