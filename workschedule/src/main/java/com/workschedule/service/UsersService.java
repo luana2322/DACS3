@@ -18,6 +18,8 @@ public interface UsersService {
 
     Users update(Users users);
 
-    Users login(UserDto userDto) throws NotFoundException;
+    UserDto login(UserDto userDto) throws NotFoundException;
+
+    Users logintest(UserDto userDto) throws NotFoundException;
 
 }

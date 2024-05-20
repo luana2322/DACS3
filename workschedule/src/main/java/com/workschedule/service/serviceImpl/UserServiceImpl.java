@@ -28,7 +28,7 @@ private UsersRepository usersRepository;
             Users users = usersRepository.findById(id).get();
             return users;
         } else {
-            return null;
+            throw new ResourceNotFoundException("Cannot find user with id:"+id);
         }
     }
 
@@ -64,7 +64,7 @@ private UsersRepository usersRepository;
     }
 
     @Override
-    public Users login(UserDto userDto) throws NotFoundException {
+    public Users logintest(UserDto userDto) throws NotFoundException {
         List<Users> usersList=findAll();
 
 
@@ -78,4 +78,31 @@ private UsersRepository usersRepository;
 
         throw new ResourceNotFoundException("User with emai "+userDto.getEmaildto()+"not found!!!");
     }
+
+    @Override
+    public UserDto login(UserDto userDto) throws NotFoundException {
+        List<Users> usersList=findAll();
+
+        for (Users user : usersList) {
+            if(user.getEmail().equals(userDto.getEmaildto())
+                    &&user.getPassword().equals(userDto.getPassworddto())){
+
+                UserDto userDto1=UserDto.builder()
+                        .emaildto(user.getEmail())
+                        .userName(user.getUsername())
+                        .passworddto("************")
+                        .imagePath(user.getImage()).build();
+
+                return userDto1;
+
+            }
+        }
+
+        throw new ResourceNotFoundException("User with emai "+userDto.getEmaildto()+"not found!!!");
+    }
+
+
 }
+
+
+

@@ -44,12 +44,8 @@ public class Users implements UserDetails {
 //    private Department department;
 
 
-    @OneToOne(
+    @OneToOne(mappedBy = "user",
             cascade = {CascadeType.ALL}
-    )
-    @JoinColumn(
-            name = "participant_id",
-            referencedColumnName = "participant_id"
     )
     private Participant participant_id;
     @OneToMany(
@@ -83,7 +79,7 @@ public class Users implements UserDetails {
     }
 
     public String getUsername() {
-        return this.email;
+        return this.userName;
     }
 
     public String getPassword() {

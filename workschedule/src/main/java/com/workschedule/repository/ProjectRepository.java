@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 
@@ -28,6 +30,14 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
             + "			from project c \r\n"
             + "         where c.manageId=?1 ",nativeQuery = true)
     List<Project> findProjectByManage(Long manageId);
+
+
+    @Query(value="select p.*,u.user_id,u.user_project_id from project p\n" +
+            "    join user_project u\n" +
+            "    on u.project_id=p.project_id\n" +
+            "    where u.user_id=?1\n" +
+            "    and p.timeStart=?2",nativeQuery = true)
+    List<Project> findProjectdate(Long user_id, LocalDate date);
 
 
 

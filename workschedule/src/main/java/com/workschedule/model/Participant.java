@@ -31,13 +31,8 @@ public class Participant {
             mappedBy = "participant"
     )
     private List<Message> messageList;
-    @OneToOne(
-            cascade = {CascadeType.ALL}
-    )
-    @JoinColumn(
-            name = "user_id",
-            referencedColumnName = "user_id"
-    )
+    @OneToOne
+    @JoinColumn(name = "user_id", unique = true)
     private Users user;
     @ManyToOne(
             fetch = FetchType.EAGER

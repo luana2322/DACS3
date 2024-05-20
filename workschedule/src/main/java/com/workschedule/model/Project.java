@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class Project {
     private String projectName;
     private String projectStatus;
     private Long projectowner;
-    private Date timeStart;
+    private LocalDate timeStart;
     private Date timeEnd;
     private String projectDescription;
 

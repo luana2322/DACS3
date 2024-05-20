@@ -27,9 +27,14 @@ public class UserController {
     return ResponseEntity.ok(userServiceImpl.save(userDto));
 }
 
-@GetMapping("/login")
+    @GetMapping("/login")
     public Users login(@RequestBody UserDto userDto) throws NotFoundException {
-    return userServiceImpl.login(userDto);
-}
+        return userServiceImpl.logintest(userDto);
+    }
+
+    @GetMapping("/logintest")
+    public UserDto logintest(@RequestBody UserDto userDto) throws NotFoundException {
+        return userServiceImpl.login(userDto);
+    }
 
 }
