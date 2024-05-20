@@ -20,13 +20,10 @@ import java.util.List;
 )
 public class Project {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
     @Column(
             name = "project_id"
     )
-    private long project_id;
+    private String project_id;
     private String projectName;
     private String projectStatus;
     private Long projectowner;

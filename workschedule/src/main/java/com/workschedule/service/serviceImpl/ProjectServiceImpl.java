@@ -1,6 +1,7 @@
 package com.workschedule.service.serviceImpl;
 
 import com.workschedule.Exception.ResourceNotFoundException;
+import com.workschedule.RandomCode.SecureRandomStringGenerator;
 import com.workschedule.model.Project;
 import com.workschedule.repository.ProjectRepository;
 import com.workschedule.service.ProjectService;
@@ -40,6 +41,13 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project save(Project project) {
+        SecureRandomStringGenerator secureRandomStringGenerator=new SecureRandomStringGenerator();
+        int length = 10; // Độ dài của chuỗi ngẫu nhiên
+        String randomString = secureRandomStringGenerator.generateSecureRandomString(length);
+        System.out.println("Chuỗi ngẫu nhiên bảo mật: " + randomString);
+
+        project.setProject_id(randomString);
+
         return projectRepository.save(project);
     }
 

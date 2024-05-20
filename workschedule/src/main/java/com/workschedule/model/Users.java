@@ -33,6 +33,7 @@ public class Users implements UserDetails {
     private String password;
     private String userName;
     private String image;
+    private String description;
 
 //    @ManyToOne(
 //            fetch = FetchType.EAGER

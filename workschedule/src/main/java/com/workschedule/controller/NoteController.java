@@ -24,6 +24,8 @@ private UserNoteServiceImpl userNoteServiceImopl;
 private UserServiceImpl userService;
 @Autowired
 private UserNoteRepository userNoteRepository;
+@Autowired
+private NoteRepository noteRepository;
 
     @PostMapping("/addnote")
     public ResponseEntity<Note> addnote(@RequestBody Note note
@@ -34,6 +36,7 @@ private UserNoteRepository userNoteRepository;
         userNote.setNote(note);
         userNote.setUsers(userService.findById(userId));
         userNoteServiceImopl.save(userNote);
+
         return ResponseEntity.ok(note1);
     }
 
@@ -61,4 +64,16 @@ private UserNoteRepository userNoteRepository;
 
         return ResponseEntity.ok(noteServiceImpl.findById(noteId));
     }
+
+    @GetMapping("/getallnotebyuser")
+    public ResponseEntity<List<Note>> getallnotebyuser(@RequestParam("userId") Long userId) {
+        List<Note> noteList= noteRepository.findNotebyUser(userId);
+
+        for (Note note:noteList){
+            note.setUserNotes(null);
+        }
+
+        return ResponseEntity.ok(noteList);
+    }
+
 }

@@ -70,12 +70,15 @@ public class ProjectController {
             , @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         List<Project> project = projectRepository.findProjectdate(user_id, date);
         if (project != null) {
-                for (Project pro:project ){
-                  //  pro.setUserProjectList(null);
-                }
-            return ResponseEntity.ok(project);
+            List<Project> taskList=  projectRepository.findProjectdate(user_id, date);
+
+            for (Project note:taskList){
+                note.setUserProjectList(null);
+            }
+
+            return ResponseEntity.ok(taskList);
         } else {
-            throw new ResourceNotFoundException("Hôm nay rảnh");
+            throw new ResourceNotFoundException("Hôm nay rảnh.Không có việc");
         }
 
     }
