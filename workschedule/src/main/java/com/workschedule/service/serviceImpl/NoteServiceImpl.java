@@ -25,6 +25,7 @@ private NoteRepository noteRepository;
     public Note findById(Long id) {
         if (noteRepository.findById(id) != null) {
             Note comment = noteRepository.findById(id).get();
+            comment.setUserNotes(null);
             return comment;
         } else {
             throw new ResourceNotFoundException("Cannot find note with id:"+id);
@@ -38,7 +39,9 @@ private NoteRepository noteRepository;
 
     @Override
     public Note save(Note role) {
-        return noteRepository.save(role);
+        Note note1=noteRepository.save(role);
+        note1.setUserNotes(null);
+        return note1;
     }
 
     @Override

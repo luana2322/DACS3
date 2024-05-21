@@ -31,20 +31,28 @@ private TaskRepository taskRepository;
 
 
     @GetMapping("/getalltask")
-    public ResponseEntity<List<Task>> getallconversation() {
+    public ResponseEntity<List<Task>> getalltask() {
         return ResponseEntity.ok(taskServiceImpl.findAll());
     }
 
     @GetMapping("/deletetask")
-    public ResponseEntity<Void> deleteconversation(@RequestParam("taskid") Long taskid) {
+    public ResponseEntity<Void> deletetask(@RequestParam("taskid") Long taskid) {
         taskServiceImpl.deteleById(taskid);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/gettaskbyprojectid")
     public ResponseEntity<List<Task>> gettaskbyprojectid(@RequestParam("projectid") Long projectid) {
-        taskServiceImpl.deteleById(projectid);
-        return ResponseEntity.ok(taskRepository.findTaskByProject(projectid));
+     //   taskServiceImpl.deteleById(projectid);
+
+        List<Task> taskList= taskRepository.findTaskByProject(projectid);
+
+
+        for (Task note:taskList){
+            note.setUserTaskList(null);
+            note.setCommentList(null);
+        }
+        return ResponseEntity.ok(taskList);
     }
 
     @GetMapping("/getalltaskbyuser")
@@ -54,11 +62,10 @@ private TaskRepository taskRepository;
 
         for (Task note:taskList){
             note.setUserTaskList(null);
+            note.setCommentList(null);
         }
 
         return ResponseEntity.ok(taskList);
-
-
         }
 
     @GetMapping("/findtaskbydate")
@@ -70,6 +77,7 @@ private TaskRepository taskRepository;
 
             for (Task note:taskList){
                 note.setUserTaskList(null);
+                note.setCommentList(null);
             }
 
             return ResponseEntity.ok(taskList);

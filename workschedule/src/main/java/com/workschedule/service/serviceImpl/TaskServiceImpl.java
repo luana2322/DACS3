@@ -20,6 +20,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> findAll() {
         this.taskList = this.taskRepository.findAll();
+        for(Task task:taskList){
+            task.setUserTaskList(null);
+            task.setCommentList(null);
+        }
         return this.taskList;
     }
 
@@ -27,6 +31,8 @@ public class TaskServiceImpl implements TaskService {
     public Task findById(Long id) {
         if (this.taskRepository.existsById(id)) {
             Task task = (Task)this.taskRepository.findById(id).get();
+           task.setUserTaskList(null);
+           task.setCommentList(null);
             return task;
         } else {
             throw new ResourceNotFoundException("Cannot find task with id:"+id);
@@ -35,11 +41,16 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deteleById(Long id) {
+        taskRepository.deleteById(id);
     }
 
     @Override
     public Task save(Task task) {
-        return null;
+        Task task1=taskRepository.save(task);
+         task1.setCommentList(null);
+        task1.setUserTaskList(null);
+
+         return task1;
     }
 
     @Override

@@ -73,6 +73,9 @@ private UsersRepository usersRepository;
             if(user.getEmail().equals(userDto.getEmaildto())
             &&user.getPassword().equals(userDto.getPassworddto())){
                 user.setUserProjectList(null);
+                user.setUserNotes(null);
+                user.setCommentList(null);
+                user.setUserTaskList(null);
                 return user;
             }
         }
