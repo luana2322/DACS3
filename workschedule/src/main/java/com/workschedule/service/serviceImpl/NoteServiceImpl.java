@@ -45,7 +45,13 @@ private NoteRepository noteRepository;
     }
 
     @Override
-    public Note update(Note role) {
-        return null;
+    public Note update(Note note,Long id) {
+        Note note1=findById(id);
+        note1.setTitle(note.getTitle());
+        note1.setContent(note.getContent());
+        note1.setDate(note.getDate());
+        Note notesaved=noteRepository.save(note1);
+        notesaved.setUserNotes(null);
+        return notesaved;
     }
 }

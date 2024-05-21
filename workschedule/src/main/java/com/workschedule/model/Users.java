@@ -32,7 +32,7 @@ public class Users implements UserDetails {
     private String email;
     private String password;
     private String userName;
-    private String image;
+    private String imagePath;
     private String description;
 
 //    @ManyToOne(

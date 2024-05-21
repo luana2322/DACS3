@@ -16,7 +16,7 @@ public interface UsersService {
 
     Users save(UserDto userDto);
 
-    Users update(Users users);
+    Users update(UserDto users,Long id);
 
     UserDto login(UserDto userDto) throws NotFoundException;
 

@@ -8,10 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -36,5 +33,18 @@ public class UserController {
     public UserDto logintest(@RequestBody UserDto userDto) throws NotFoundException {
         return userServiceImpl.login(userDto);
     }
+
+    @PostMapping("/updateuser")
+    public ResponseEntity<Users> updateuser(@RequestBody @Valid UserDto userDto
+            ,BindingResult bindingResult,
+              @RequestParam("userId") Long userId) throws Exception {
+//if (bindingResult.hasErrors()){
+//    throw new  Exception("Wrong data");
+//}
+        return ResponseEntity.ok(userServiceImpl.update(userDto,userId));
+    }
+
+
+
 
 }

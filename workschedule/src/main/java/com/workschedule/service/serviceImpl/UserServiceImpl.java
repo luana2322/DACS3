@@ -59,8 +59,34 @@ private UsersRepository usersRepository;
     }
 
     @Override
-    public Users update(Users users) {
-        return null;
+    public Users update(UserDto userDto,Long userId) {
+        Users users=findById(userId);
+
+
+        List<Users> usersList=usersRepository.findAll();
+
+        for (Users user : usersList) {
+            if(user.getEmail().equals(userDto.getEmaildto())){
+                throw new ResourceNotFoundException("Email already exists.");
+            }
+        }
+
+        if(userDto.getUserName().equals(userDto.getEmaildto())){
+            throw new ResourceNotFoundException("Username and email must not be the same.");
+        }
+
+        users.setUserName(userDto.getUserName());
+        users.setImagePath(userDto.getImagePath());
+        users.setEmail(userDto.getEmaildto());
+        users.setPassword(userDto.getPassworddto());
+        users.setDescription(userDto.getDescription());
+
+        Users usersave=usersRepository.save(users);
+        usersave.setUserProjectList(null);
+        usersave.setUserNotes(null);
+        usersave.setCommentList(null);
+        usersave.setUserTaskList(null);
+        return usersave;
     }
 
     @Override
@@ -95,7 +121,7 @@ private UsersRepository usersRepository;
                         .emaildto(user.getEmail())
                         .userName(user.getUsername())
                         .passworddto("************")
-                        .imagePath(user.getImage()).build();
+                        .imagePath(user.getImagePath()).build();
 
                 return userDto1;
 

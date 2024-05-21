@@ -26,10 +26,11 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> searchproject(String keyword);
 
 
-    @Query(value="select c.* \r\n"
-            + "			from project c \r\n"
-            + "         where c.manageId=?1 ",nativeQuery = true)
-    List<Project> findProjectByManage(Long manageId);
+    @Query(value="select p.*,u.user_id,u.user_project_id from project p\n" +
+            "    join user_project u\n" +
+            "    on u.project_id=p.project_id\n" +
+            "    where u.user_id=?1\n",nativeQuery = true)
+    List<Project> findProjectByUser(Long userId);
 
 
     @Query(value="select p.*,u.user_id,u.user_project_id from project p\n" +

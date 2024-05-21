@@ -76,4 +76,15 @@ private NoteRepository noteRepository;
         return ResponseEntity.ok(noteList);
     }
 
+
+    @PostMapping("/updatenote")
+    public ResponseEntity<Note> updatenote(@RequestBody Note note
+            , @RequestParam("noteId") Long noteId) {
+        Note note1 =noteServiceImpl.update(note,noteId);
+
+
+        return ResponseEntity.ok(note1);
+    }
+
+
 }

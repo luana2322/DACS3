@@ -13,5 +13,5 @@ public interface ProjectService {
 
     Project save(Project project);
 
-    Project update(Project project);
+    Project update(Project project,Long id);
 }

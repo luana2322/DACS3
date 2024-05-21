@@ -47,12 +47,22 @@ public class ProjectServiceImpl implements ProjectService {
         System.out.println("Chuỗi ngẫu nhiên bảo mật: " + randomString);
 
         project.setProject_id(randomString);
-
+project.setUserProjectList(null);
         return projectRepository.save(project);
     }
 
     @Override
-    public Project update(Project project) {
-        return null;
+    public Project update(Project project,Long id) {
+        Project pro=findById(id);
+        pro.setProjectName(project.getProjectName());
+        pro.setProjectStatus(project.getProjectStatus());
+        pro.setProjectDescription(project.getProjectDescription());
+        pro.setTimeStart(project.getTimeStart());
+        pro.setTimeEnd(project.getTimeEnd());
+        pro.setProjectowner(project.getProjectowner());
+
+        Project prosaved=projectRepository.save(pro);
+        prosaved.setUserProjectList(null);
+        return prosaved;
     }
 }

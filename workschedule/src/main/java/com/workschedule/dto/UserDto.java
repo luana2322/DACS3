@@ -20,4 +20,5 @@ String passworddto;
     @Min(value = 1, message = "userName không được để trống")
     String userName;
     String imagePath;
+    private String description;
 }

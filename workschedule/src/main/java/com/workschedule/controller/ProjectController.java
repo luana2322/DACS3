@@ -38,7 +38,9 @@ public class ProjectController {
         User_Project userProject = new User_Project();
         userProject.setProject(projectsaved);
         userProject.setUsers(userService.findById(userId));
-        userProjectServiceimpl.save(userProject);
+        userProjectServiceimpl.saveowner(userProject);
+
+
 
         return ResponseEntity.ok(projectsaved);
     }
@@ -59,10 +61,13 @@ public class ProjectController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/getprjectbymanageid")
-    public ResponseEntity<List<Project>> gettaskbyprojectid(@RequestParam("projectid") Long manageId) {
-
-        return ResponseEntity.ok(projectRepository.findProjectByManage(manageId));
+    @GetMapping("/getprjectbyuserId")
+    public ResponseEntity<List<Project>> getprjectbyuserId(@RequestParam("userId") Long userId) {
+        List<Project> projectList= projectRepository.findProjectByUser(userId);
+        for(Project pro:projectList){
+            pro.setUserProjectList(null);
+        }
+        return ResponseEntity.ok(projectList);
     }
 
     @GetMapping("/findprojectbydate")
@@ -82,6 +87,18 @@ public class ProjectController {
         }
 
     }
+
+    @PostMapping("/updateproject")
+    public ResponseEntity<Project> updateproject(@RequestBody Project project
+            , @RequestParam("projectId") Long projectId) {
+
+        project.setProjectStatus(ProjectStatus.TODO.toString());
+
+        Project projectsaved = projectServiceImpl.update(project,projectId);
+
+        return ResponseEntity.ok(projectsaved);
+    }
+
 
 
 }

@@ -14,5 +14,5 @@ public interface NoteService {
 
     Note save(Note role);
 
-    Note update(Note role);
+    Note update(Note role,Long id);
 }
