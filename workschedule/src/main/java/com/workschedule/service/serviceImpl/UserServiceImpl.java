@@ -72,18 +72,25 @@ private UsersRepository usersRepository;
                 }
             }
         }
-
-
-
         if(userDto.getUserName().equals(userDto.getEmaildto())){
             throw new ResourceNotFoundException("Username and email must not be the same.");
         }
 
-        users.setUserName(userDto.getUserName());
-        users.setImagePath(userDto.getImagePath());
-        users.setEmail(userDto.getEmaildto());
-        users.setPassword(userDto.getPassworddto());
-        users.setDescription(userDto.getDescription());
+        if(userDto.getUserName()!=null){
+            users.setUserName(userDto.getUserName());
+        }
+        if(userDto.getImagePath()!=null){
+            users.setImagePath(userDto.getImagePath());
+        }
+        if(userDto.getEmaildto()!=null){
+            users.setEmail(userDto.getEmaildto());
+        }
+        if(userDto.getPassworddto()!=null){
+            users.setPassword(userDto.getPassworddto());
+        }
+        if(userDto.getDescription()!=null){
+            users.setDescription(userDto.getDescription());
+        }
 
         Users usersave=usersRepository.save(users);
         usersave.setUserProjectList(null);
