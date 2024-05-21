@@ -65,11 +65,15 @@ private UsersRepository usersRepository;
 
         List<Users> usersList=usersRepository.findAll();
 
-        for (Users user : usersList) {
-            if(user.getEmail().equals(userDto.getEmaildto())){
-                throw new ResourceNotFoundException("Email already exists.");
+        if(!userDto.getEmaildto().equals(users.getEmail())){
+            for (Users user : usersList) {
+                if(user.getEmail().equals(userDto.getEmaildto())){
+                    throw new ResourceNotFoundException("Email already exists.");
+                }
             }
         }
+
+
 
         if(userDto.getUserName().equals(userDto.getEmaildto())){
             throw new ResourceNotFoundException("Username and email must not be the same.");
