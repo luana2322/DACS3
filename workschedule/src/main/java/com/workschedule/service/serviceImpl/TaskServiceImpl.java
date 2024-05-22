@@ -16,11 +16,10 @@ public class TaskServiceImpl implements TaskService {
     List<Task> taskList;
 
 
-
     @Override
     public List<Task> findAll() {
         this.taskList = this.taskRepository.findAll();
-        for(Task task:taskList){
+        for (Task task : taskList) {
             task.setUserTaskList(null);
             task.setCommentList(null);
         }
@@ -30,12 +29,12 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task findById(Long id) {
         if (this.taskRepository.existsById(id)) {
-            Task task = (Task)this.taskRepository.findById(id).get();
-           task.setUserTaskList(null);
-           task.setCommentList(null);
+            Task task = (Task) this.taskRepository.findById(id).get();
+            task.setUserTaskList(null);
+            task.setCommentList(null);
             return task;
         } else {
-            throw new ResourceNotFoundException("Cannot find task with id:"+id);
+            throw new ResourceNotFoundException("Cannot find task with id:" + id);
         }
     }
 
@@ -46,15 +45,39 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task save(Task task) {
-        Task task1=taskRepository.save(task);
-         task1.setCommentList(null);
+        Task task1 = taskRepository.save(task);
+        task1.setCommentList(null);
         task1.setUserTaskList(null);
+        task1.getProject().setUserProjectList(null);
 
-         return task1;
+        return task1;
     }
 
     @Override
-    public Task update(Task task) {
-        return null;
+    public Task update(Task task, Long taskId) {
+        Task task1 = findById(taskId);
+
+
+        if (task.getTaskStatus() != null) {
+            task1.setTaskStatus(task.getTaskStatus());
+        }
+        if (task.getTaskName() != null) {
+            task1.setTaskName(task.getTaskName());
+        }
+        if (task.getDeadline() != null) {
+            task1.setDeadline(task.getDeadline());
+        }
+        if (task.getTimeStart() != null) {
+            task1.setTimeStart(task.getTimeStart());
+        }
+        if (task.getTimeEnd() != null) {
+            task1.setTimeEnd(task.getTimeEnd());
+        }
+        Task taskupdated = taskRepository.save(task1);
+
+        taskupdated.setCommentList(null);
+        taskupdated.setUserTaskList(null);
+        taskupdated.getProject().setUserProjectList(null);
+        return taskupdated;
     }
 }

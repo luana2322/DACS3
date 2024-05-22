@@ -90,7 +90,7 @@ public class ProjectController {
 
     @PostMapping("/updateproject")
     public ResponseEntity<Project> updateproject(@RequestBody Project project
-            , @RequestParam("projectId") Long projectId) {
+            , @RequestParam("projectId") String projectId) {
 
         project.setProjectStatus(ProjectStatus.TODO.toString());
 

@@ -13,13 +13,11 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    @Query(value="select a.*,c.project_name\r\n"
-            + "			from project c \r\n"
-            + "			join task a \r\n"
-            + "			on a.project_id=c.project_id\r\n"
+    @Query(value="select a.*\r\n"
+            + "			from task a \r\n"
 
-            + "         where c.project_id=?1 ",nativeQuery = true)
-    List<Task> findTaskByProject(Long project_id);
+            + "         where a.project_id like ?1 ",nativeQuery = true)
+    List<Task> findTaskByProject(String project_id);
 
     @Query(value="select p.*,u.user_task_id,u.user_id from task p\n" +
             "    join user_task u\n" +

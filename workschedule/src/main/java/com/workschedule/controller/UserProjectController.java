@@ -6,10 +6,9 @@ import com.workschedule.model.User_Project;
 import com.workschedule.service.serviceImpl.UserProjectServiceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class UserProjectController {
@@ -17,16 +16,44 @@ public class UserProjectController {
     private UserProjectServiceimpl userProjectServiceimpl;
 
     @PostMapping("/joinproject")
-    public ResponseEntity<User_Project> addproject(@RequestParam("projectId") Long projectId
+    public ResponseEntity<User_Project> addproject(@RequestParam("projectId") String projectId
             , @RequestParam("userId") Long userId) {
 
-     User_Project user_project=  userProjectServiceimpl.save(projectId,userId);
-            user_project.getProject().setUserProjectList(null);
-            user_project.getUsers().setUserTaskList(null);
-            user_project.getUsers().setUserNotes(null);
-            user_project.getUsers().setCommentList(null);
-            user_project.getUsers().setUserProjectList(null);
+        User_Project user_project=  userProjectServiceimpl.save(projectId,userId);
+        user_project.getProject().setUserProjectList(null);
+        user_project.getUsers().setUserTaskList(null);
+        user_project.getUsers().setUserNotes(null);
+        user_project.getUsers().setCommentList(null);
+        user_project.getUsers().setUserProjectList(null);
         return ResponseEntity.ok(user_project);
     }
+
+    @PostMapping("/updateuserproject")
+    public ResponseEntity<User_Project> updateuserproject(@RequestParam("projectId") String projectId
+            , @RequestParam("userId") Long userId
+            , @RequestParam("userProjectId") Long userProjectId ) {
+
+        User_Project user_project=  userProjectServiceimpl.update(projectId,userId,userProjectId);
+        user_project.getProject().setUserProjectList(null);
+        user_project.getUsers().setUserTaskList(null);
+        user_project.getUsers().setUserNotes(null);
+        user_project.getUsers().setCommentList(null);
+        user_project.getUsers().setUserProjectList(null);
+        return ResponseEntity.ok(user_project);
+    }
+
+    @GetMapping("/findAlluspr")
+    public ResponseEntity<List<User_Project>> findAlluspr( ) {
+        List<User_Project> userProjectList=userProjectServiceimpl.findAll();
+        for(User_Project userProject:userProjectList){
+            userProject.getProject().setUserProjectList(null);
+            userProject.getUsers().setUserProjectList(null);
+            userProject.getUsers().setUserTaskList(null);
+            userProject.getUsers().setUserNotes(null);
+            userProject.getUsers().setCommentList(null);
+        }
+        return ResponseEntity.ok(userProjectList);
+    }
+
 
 }

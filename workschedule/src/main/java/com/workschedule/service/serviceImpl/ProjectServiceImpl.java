@@ -25,12 +25,12 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project findById(Long id) {
-        if (this.projectRepository.existsById(id)) {
-            Project project = (Project)this.projectRepository.findById(id).get();
+    public Project findById(String project_id) {
+        if (projectRepository.findByIdConfig(project_id)!=null) {
+            Project project = (Project)this.projectRepository.findByIdConfig(project_id);
             return project;
         } else {
-            throw new ResourceNotFoundException("Cannot find project with id:"+id);
+            throw new ResourceNotFoundException("Cannot find project with id:"+project_id);
         }
     }
 
@@ -52,14 +52,28 @@ project.setUserProjectList(null);
     }
 
     @Override
-    public Project update(Project project,Long id) {
+    public Project update(Project project,String id) {
         Project pro=findById(id);
-        pro.setProjectName(project.getProjectName());
-        pro.setProjectStatus(project.getProjectStatus());
-        pro.setProjectDescription(project.getProjectDescription());
-        pro.setTimeStart(project.getTimeStart());
-        pro.setTimeEnd(project.getTimeEnd());
-        pro.setProjectowner(project.getProjectowner());
+
+
+        if(project.getProjectName()!=null){
+            pro.setProjectName(project.getProjectName());
+        }
+        if(project.getProjectStatus()!=null){
+            pro.setProjectStatus(project.getProjectStatus());
+        }
+        if(project.getProjectDescription()!=null){
+            pro.setProjectDescription(project.getProjectDescription());
+        }
+        if(project.getTimeStart()!=null){
+            pro.setTimeStart(project.getTimeStart());
+        }
+        if(project.getTimeEnd()!=null){
+            pro.setTimeEnd(project.getTimeEnd());
+        }
+        if(project.getProjectowner()!=null){
+            pro.setProjectowner(project.getProjectowner());
+        }
 
         Project prosaved=projectRepository.save(pro);
         prosaved.setUserProjectList(null);

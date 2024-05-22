@@ -11,7 +11,7 @@ public interface UserTaskService {
 
     void deteleById(Long id);
 
-    User_Task save(User_Task userTask);
+    User_Task save(Long userId ,Long taskId);
 
     User_Task update(User_Task userTask);
 }

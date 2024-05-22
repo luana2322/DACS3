@@ -14,5 +14,5 @@ public interface TaskService {
 
     Task save(Task task);
 
-    Task update(Task task);
+    Task update(Task task,Long taskId);
 }

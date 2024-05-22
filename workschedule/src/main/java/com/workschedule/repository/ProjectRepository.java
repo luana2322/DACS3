@@ -40,6 +40,10 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
             "    and p.timeStart=?2",nativeQuery = true)
     List<Project> findProjectdate(Long user_id, LocalDate date);
 
+    @Query(value="select p.* from project p\n" +
+            "    where p.project_id like ?1\n" ,nativeQuery = true)
+    Project findByIdConfig(String project_id);
+
 
 
 

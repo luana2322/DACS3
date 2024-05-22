@@ -1,11 +1,9 @@
 package com.workschedule.controller;
 
 import com.workschedule.Exception.ResourceNotFoundException;
-import com.workschedule.model.Note;
-import com.workschedule.model.Project;
-import com.workschedule.model.Task;
-import com.workschedule.model.TaskStatus;
+import com.workschedule.model.*;
 import com.workschedule.repository.TaskRepository;
+import com.workschedule.service.serviceImpl.ProjectServiceImpl;
 import com.workschedule.service.serviceImpl.TaskServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,10 +19,16 @@ public class TaskController {
     private TaskServiceImpl taskServiceImpl;
 @Autowired
 private TaskRepository taskRepository;
+@Autowired
+private ProjectServiceImpl projectServiceImpl;
 
 
     @PostMapping("/addtask")
-    public ResponseEntity<Task> addconversation(@RequestBody Task task) {
+    public ResponseEntity<Task> addtask(@RequestBody Task task ,
+                                        @RequestParam("projectId") String projectId) {
+        Project pro=projectServiceImpl.findById(projectId);
+
+        task.setProject(pro);
        task.setTaskStatus(TaskStatus.TODO.toString());
         return ResponseEntity.ok(taskServiceImpl.save(task));
     }
@@ -42,7 +46,7 @@ private TaskRepository taskRepository;
     }
 
     @GetMapping("/gettaskbyprojectid")
-    public ResponseEntity<List<Task>> gettaskbyprojectid(@RequestParam("projectid") Long projectid) {
+    public ResponseEntity<List<Task>> gettaskbyprojectid(@RequestParam("projectid") String projectid) {
      //   taskServiceImpl.deteleById(projectid);
 
         List<Task> taskList= taskRepository.findTaskByProject(projectid);
@@ -51,6 +55,7 @@ private TaskRepository taskRepository;
         for (Task note:taskList){
             note.setUserTaskList(null);
             note.setCommentList(null);
+            note.getProject().setUserProjectList(null);
         }
         return ResponseEntity.ok(taskList);
     }
@@ -86,6 +91,16 @@ private TaskRepository taskRepository;
             throw new ResourceNotFoundException("Hôm nay rảnh.Không có việc");
         }
 
+    }
+
+    @PostMapping("/updatetask")
+    public ResponseEntity<Task> updateproject(@RequestBody Task task
+            , @RequestParam("taskId") Long taskId) {
+
+
+        Task tasksaved = taskServiceImpl.update(task,taskId);
+
+        return ResponseEntity.ok(tasksaved);
     }
 
 

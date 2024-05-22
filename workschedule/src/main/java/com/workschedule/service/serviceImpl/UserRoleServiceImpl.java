@@ -38,12 +38,12 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    public User_Project save(User_Project userTask) {
+    public User_Project save(Long taskId,Long userId) {
         return null;
     }
 
     @Override
-    public User_Project update(User_Project userTask) {
+    public User_Project update(User_Project userTask,Long userprojectId) {
         return null;
     }
 }

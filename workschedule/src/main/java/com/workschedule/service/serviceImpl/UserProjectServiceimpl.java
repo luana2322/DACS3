@@ -49,11 +49,11 @@ public class UserProjectServiceimpl implements UserProjectService {
     }
 
     @Override
-    public User_Project save(Long projectId,Long userId) {
-        if (!projectRepository.existsById(projectId)) {
+    public User_Project save(String projectId,Long userId) {
+        if (projectRepository.findByIdConfig(projectId)==null) {
             throw new ResourceNotFoundException("Cannot find Project with id:"+projectId);
         } else if(!usersRepository.existsById(userId)) {
-            throw new ResourceNotFoundException("Cannot find Project with id:"+userId);
+            throw new ResourceNotFoundException("Cannot find user with id:"+userId);
         }else{
             User_Project userProject=User_Project.builder()
                     .users(userServiceImpl.findById(userId))
@@ -61,8 +61,6 @@ public class UserProjectServiceimpl implements UserProjectService {
                     .build();
             return userProjectRepository.save(userProject);
         }
-
-
     }
 
     @Override
@@ -72,7 +70,22 @@ public class UserProjectServiceimpl implements UserProjectService {
 
 
     @Override
-    public User_Project update(User_Project userProject) {
-        return null;
+    public User_Project update(String projectId,Long userId,Long userProjectId) {
+        User_Project user_project=findById(userProjectId);
+
+        if (projectRepository.findByIdConfig(projectId)==null) {
+            throw new ResourceNotFoundException("Cannot find Project with id:"+projectId);
+        } else if(!usersRepository.existsById(userId)) {
+            throw new ResourceNotFoundException("Cannot find user with id:"+userId);
+        }else{
+          user_project=User_Project.builder()
+                  .user_project_id(userProjectId)
+                    .users(userServiceImpl.findById(userId))
+                    .project(projectServiceImpl.findById(projectId))
+                    .build();
+            return userProjectRepository.save(user_project);
+        }
+
     }
+
 }

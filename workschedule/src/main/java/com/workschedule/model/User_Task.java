@@ -1,10 +1,7 @@
 package com.workschedule.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Setter
@@ -14,6 +11,7 @@ import lombok.Setter;
 @Table(
         name = "user_task"
 )
+@Builder
 public class User_Task {
     @Id
     @GeneratedValue(

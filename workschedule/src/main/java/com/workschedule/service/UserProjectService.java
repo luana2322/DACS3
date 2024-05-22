@@ -14,10 +14,10 @@ public interface UserProjectService {
 
     void deteleById(Long id);
 
-    User_Project save(Long projectId,Long userId);
+    User_Project save(String projectId,Long userId);
 
     User_Project saveowner(User_Project userProject);
 
-    User_Project update(User_Project task);
+    User_Project update(String projectId,Long userId,Long userProjectId);
 
 }
