@@ -2,7 +2,9 @@ package com.workschedule.controller;
 
 import com.workschedule.Exception.NotFoundException;
 import com.workschedule.dto.UserDto;
+import com.workschedule.model.Project;
 import com.workschedule.model.Users;
+import com.workschedule.repository.UsersRepository;
 import com.workschedule.service.serviceImpl.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +12,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 @Autowired
     private UserServiceImpl userServiceImpl;
+@Autowired
+private UsersRepository usersRepository;
 
 @PostMapping("/register")
     public ResponseEntity<Users> register(@RequestBody @Valid UserDto userDto
@@ -44,7 +50,17 @@ public class UserController {
         return ResponseEntity.ok(userServiceImpl.update(userDto,userId));
     }
 
-
+    @GetMapping("/getalluserbyprojectId")
+    public ResponseEntity<List<Users>> getalluserbyprojectId(@RequestParam("projectId") Long projectId) {
+        List<Users> projectList= usersRepository.findUsersByProjectId(projectId);
+        for(Users pro:projectList){
+            pro.setUserProjectList(null);
+            pro.setUserTaskList(null);
+            pro.setUserNotes(null);
+            pro.setCommentList(null);
+        }
+        return ResponseEntity.ok(projectList);
+    }
 
 
 }
