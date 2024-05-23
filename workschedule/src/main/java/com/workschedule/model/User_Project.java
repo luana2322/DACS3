@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Table(
         name = "user_project"
+        , uniqueConstraints = @UniqueConstraint(columnNames = {"project_id", "user_id"})
 )
 @Builder
 public class User_Project {

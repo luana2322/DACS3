@@ -59,7 +59,13 @@ public class UserProjectServiceimpl implements UserProjectService {
                     .users(userServiceImpl.findById(userId))
                     .project(projectServiceImpl.findById(projectId))
                     .build();
-            return userProjectRepository.save(userProject);
+            if (userProjectRepository.save(userProject)==null){
+                throw new ResourceNotFoundException("Trung");
+
+            }else{
+
+                return userProjectRepository.save(userProject);
+            }
         }
     }
 
