@@ -30,7 +30,9 @@ public class Role {
 
 
 
-    @OneToOne
-    @JoinColumn(name = "user_project_id", unique = true)
-    private User_Project userProject;
+   @OneToMany(
+            mappedBy = "role", cascade = CascadeType.ALL
+
+    )
+    private List<User_Project> userProjectList;
 }

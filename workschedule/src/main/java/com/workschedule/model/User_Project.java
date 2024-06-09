@@ -3,6 +3,8 @@ package com.workschedule.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Setter
 @Getter
@@ -36,8 +38,12 @@ public class User_Project {
     )
     private Users users;
 
-    @OneToOne(mappedBy = "userProject",
-            cascade = {CascadeType.ALL}
+    @ManyToOne(
+            fetch = FetchType.EAGER
+    )
+    @JoinColumn(
+            name = "role_id",
+            referencedColumnName = "role_id"
     )
     private Role role;
 }
