@@ -27,8 +27,6 @@ public class Role {
     private long role_id;
     private String roleName;
     private String description;
-    private Date createdAt;
-    private Date updatedAt;
 
 
 
