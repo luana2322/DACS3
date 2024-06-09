@@ -51,7 +51,7 @@ private UsersRepository usersRepository;
     }
 
     @GetMapping("/getalluserbyprojectId")
-    public ResponseEntity<List<Users>> getalluserbyprojectId(@RequestParam("projectId") Long projectId) {
+    public ResponseEntity<List<Users>> getalluserbyprojectId(@RequestParam("projectId")String projectId) {
         List<Users> projectList= usersRepository.findUsersByProjectId(projectId);
         for(Users pro:projectList){
             pro.setUserProjectList(null);

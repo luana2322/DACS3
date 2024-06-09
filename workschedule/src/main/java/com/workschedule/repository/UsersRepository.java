@@ -19,6 +19,6 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
             "   from users p\n" +
             "    join user_project u\n" +
             "    on u.user_id=p.user_id\n" +
-            "    where u.project_id=?1\n",nativeQuery = true)
-    List<Users> findUsersByProjectId(Long projectId);
+            "    where u.project_id like lower(concat('%',:projectId,'%'))\n",nativeQuery = true)
+    List<Users> findUsersByProjectId(String projectId);
 }
