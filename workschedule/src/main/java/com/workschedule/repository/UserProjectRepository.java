@@ -15,7 +15,8 @@ public interface UserProjectRepository  extends JpaRepository<User_Project, Long
 
     @Query(value="select *\r\n"
             + "		from	 user_project a \r\n"
-            + "         where a.user_id=?1 ",nativeQuery = true)
-    Optional<User_Project> findUserProjectByUser(Long userId);
+            + "         where a.user_id=?1 " +
+            "and a.project_id=?2 ",nativeQuery = true)
+    Optional<User_Project> findUserProjectByUserAndProject(Long userId,String projectId);
 
 }

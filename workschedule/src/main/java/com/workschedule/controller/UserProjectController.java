@@ -40,6 +40,7 @@ public class UserProjectController {
         user_project.getUsers().setUserNotes(null);
         user_project.getUsers().setCommentList(null);
         user_project.getUsers().setUserProjectList(null);
+        user_project.getRole().setUserProjectList(null);
         return ResponseEntity.ok(user_project);
     }
 
