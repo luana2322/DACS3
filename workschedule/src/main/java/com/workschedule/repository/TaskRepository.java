@@ -29,7 +29,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             "    join user_task u\n" +
             "    on u.task_id=p.task_id\n" +
             "    where u.user_id=?1\n" +
-            "    and p.timeStart=?2",nativeQuery = true)
+            "    and ?2 BETWEEN p.timeStart AND p.timeEnd",nativeQuery = true)
     List<Task> findTaskbydate(Long user_id, LocalDate date);
 
 

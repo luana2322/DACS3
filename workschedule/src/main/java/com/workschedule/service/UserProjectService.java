@@ -18,6 +18,6 @@ public interface UserProjectService {
 
     User_Project saveowner(User_Project userProject);
 
-    User_Project update(String projectId,Long userId,Long userProjectId);
+    User_Project update(String projectId,Long userId,Long roleId);
 
 }

@@ -31,9 +31,10 @@ public class UserProjectController {
     @PostMapping("/updateuserproject")
     public ResponseEntity<User_Project> updateuserproject(@RequestParam("projectId") String projectId
             , @RequestParam("userId") Long userId
-            , @RequestParam("userProjectId") Long userProjectId ) {
+            // , @RequestParam("userProjectId") Long userProjectId     khi nào cần dùng dùng lại đỡ quên và khả năng là ko bao giờ
+            , @RequestParam("roleId") Long roleId ) {
 
-        User_Project user_project=  userProjectServiceimpl.update(projectId,userId,userProjectId);
+        User_Project user_project=  userProjectServiceimpl.update(projectId,userId,roleId);
         user_project.getProject().setUserProjectList(null);
         user_project.getUsers().setUserTaskList(null);
         user_project.getUsers().setUserNotes(null);

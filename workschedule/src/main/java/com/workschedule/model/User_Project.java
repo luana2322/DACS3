@@ -36,7 +36,7 @@ public class User_Project {
             name = "user_id",
             referencedColumnName = "user_id"
     )
-    private Users users;
+    private Users users; 
 
     @ManyToOne(
             fetch = FetchType.EAGER

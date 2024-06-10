@@ -24,6 +24,8 @@ public class UserProjectServiceimpl implements UserProjectService {
     private UserServiceImpl userServiceImpl;
     @Autowired
     private ProjectServiceImpl projectServiceImpl;
+    @Autowired
+    private RoleServiceImpl roleServiceImpl;
     @Override
     public List<User_Project> findAll() {
         return userProjectRepository.findAll();
@@ -76,8 +78,8 @@ public class UserProjectServiceimpl implements UserProjectService {
 
 
     @Override
-    public User_Project update(String projectId,Long userId,Long userProjectId) {
-        User_Project user_project=findById(userProjectId);
+    public User_Project update(String projectId,Long userId,Long roleId) {
+        User_Project user_project=userProjectRepository.findUserProjectByUser(userId).get();
 
         if (projectRepository.findByIdConfig(projectId)==null) {
             throw new ResourceNotFoundException("Cannot find Project with id:"+projectId);
@@ -85,9 +87,9 @@ public class UserProjectServiceimpl implements UserProjectService {
             throw new ResourceNotFoundException("Cannot find user with id:"+userId);
         }else{
           user_project=User_Project.builder()
-                  .user_project_id(userProjectId)
                     .users(userServiceImpl.findById(userId))
                     .project(projectServiceImpl.findById(projectId))
+                  .role(roleServiceImpl.findById(roleId))
                     .build();
             return userProjectRepository.save(user_project);
         }
