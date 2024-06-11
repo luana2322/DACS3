@@ -65,9 +65,10 @@ private ProjectServiceImpl projectServiceImpl;
 
         List<Task> taskList= taskRepository.findTaskbyUser(userId);
 
-        for (Task note:taskList){
-            note.setUserTaskList(null);
-            note.setCommentList(null);
+        for (Task task:taskList){
+            task.setUserTaskList(null);
+            task.setCommentList(null);
+            task.getProject().setUserProjectList(null);
         }
 
         return ResponseEntity.ok(taskList);
@@ -83,6 +84,7 @@ private ProjectServiceImpl projectServiceImpl;
             for (Task note:taskList){
                 note.setUserTaskList(null);
                 note.setCommentList(null);
+                note.getProject().setUserProjectList(null);
             }
 
             return ResponseEntity.ok(taskList);

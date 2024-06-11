@@ -3,6 +3,8 @@ package com.workschedule.controller;
 import com.workschedule.Exception.NotFoundException;
 import com.workschedule.dto.UserDto;
 import com.workschedule.model.Project;
+import com.workschedule.model.Task;
+import com.workschedule.model.User_Task;
 import com.workschedule.model.Users;
 import com.workschedule.repository.UsersRepository;
 import com.workschedule.service.serviceImpl.UserServiceImpl;
@@ -58,6 +60,24 @@ private UsersRepository usersRepository;
             pro.setUserTaskList(null);
             pro.setUserNotes(null);
             pro.setCommentList(null);
+        }
+        return ResponseEntity.ok(projectList);
+    }
+
+    @GetMapping("/getalluserbytaskId")
+    public ResponseEntity<List<Users>> getalluserbytask(@RequestParam("taskId")Long taskId) {
+        List<Users> projectList= usersRepository.getalluserbytask(taskId);
+        for(Users users:projectList){
+            users.setUserProjectList(null);
+            for(User_Task task:users.getUserTaskList()){
+                task.getTask().setUserTaskList(null);
+                task.getTask().setCommentList(null);
+                task.setUsers(null);
+                task.getTask().setProject(null);
+            }
+            users.setUserNotes(null);
+            users.setCommentList(null);
+            users.setPassword("********");
         }
         return ResponseEntity.ok(projectList);
     }

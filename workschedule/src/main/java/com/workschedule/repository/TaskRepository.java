@@ -19,6 +19,12 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             + "         where a.project_id like ?1 ",nativeQuery = true)
     List<Task> findTaskByProject(String project_id);
 
+//    @Query(value="select p.*,u.user_task_id,u.user_id from task p\n" +
+//            "    join user_task u\n" +
+//            "    on u.task_id=p.task_id\n" +
+//            "    where u.user_id=?1\n" ,nativeQuery = true)
+//    List<Task> findTaskbyUser(Long user_id);
+
     @Query(value="select p.*,u.user_task_id,u.user_id from task p\n" +
             "    join user_task u\n" +
             "    on u.task_id=p.task_id\n" +

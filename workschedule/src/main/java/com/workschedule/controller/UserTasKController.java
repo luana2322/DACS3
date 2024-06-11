@@ -19,7 +19,7 @@ public class UserTasKController {
     public ResponseEntity<User_Task> addusertask(@RequestParam("taskId") Long taskId
             , @RequestParam("userId") Long userId) {
 
-        User_Task userTask=  userTaskServiceImpl.save(taskId,userId);
+        User_Task userTask=  userTaskServiceImpl.save(userId,taskId);
         return ResponseEntity.ok(userTask);
     }
 
