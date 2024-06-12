@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserProjectServiceimpl implements UserProjectService {
     @Autowired
@@ -39,6 +41,17 @@ public class UserProjectServiceimpl implements UserProjectService {
         } else {
             throw new ResourceNotFoundException("Cannot find userProject with id:"+id);
         }
+    }
+
+    @Override
+    public void kickuser(String projectId, Long userId) {
+        Optional<User_Project> us=userProjectRepository.findUserProjectByUserAndProject(userId,projectId);
+              if(us.isPresent()){
+                  deteleById(us.get().getUser_project_id());
+              }else{
+                  throw new ResourceNotFoundException("Cannot find userProject with this information.Pls check again");
+              }
+
     }
 
     @Override

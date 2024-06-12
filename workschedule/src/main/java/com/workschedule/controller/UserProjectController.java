@@ -3,6 +3,7 @@ package com.workschedule.controller;
 import com.workschedule.model.Project;
 import com.workschedule.model.ProjectStatus;
 import com.workschedule.model.User_Project;
+import com.workschedule.repository.UserProjectRepository;
 import com.workschedule.service.serviceImpl.UserProjectServiceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,8 @@ import java.util.List;
 public class UserProjectController {
 @Autowired
     private UserProjectServiceimpl userProjectServiceimpl;
+@Autowired
+private UserProjectRepository userProjectRepository;
 
     @PostMapping("/joinproject")
     public ResponseEntity<User_Project> addproject(@RequestParam("projectId") String projectId
@@ -56,6 +59,31 @@ public class UserProjectController {
         }
         return ResponseEntity.ok(userProjectList);
     }
+
+    @GetMapping("/findroleinuspr")
+    public ResponseEntity<User_Project> findroleinuspr(@RequestParam("projectId") String projectId
+            , @RequestParam("userId") Long userId) {
+        User_Project uspr=userProjectRepository.findUserProjectByUserAndProject(userId,projectId).get();
+        uspr.getProject().setUserProjectList(null);
+        uspr.getUsers().setUserProjectList(null);
+        uspr.getUsers().setUserTaskList(null);
+        uspr.getUsers().setUserNotes(null);
+        uspr.getUsers().setCommentList(null);
+        uspr.getRole().setUserProjectList(null);
+
+        return ResponseEntity.ok(uspr);
+    }
+
+
+    @GetMapping("/kickuser")
+    public ResponseEntity<String> kickuser(@RequestParam("projectId") String projectId
+            , @RequestParam("userId") Long userId) {
+       userProjectServiceimpl.kickuser(projectId,userId);
+
+        return ResponseEntity.ok("Delete successfull");
+    }
+
+
 
 
 }

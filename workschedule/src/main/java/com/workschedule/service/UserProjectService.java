@@ -12,6 +12,8 @@ public interface UserProjectService {
     User_Project findById(Long id);
 
 
+    void kickuser(String projectId,Long userId);
+
     void deteleById(Long id);
 
     User_Project save(String projectId,Long userId);
