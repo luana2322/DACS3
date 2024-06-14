@@ -38,7 +38,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Message save(Message message) {
-        return null;
+        return messageRepository.save(message);
     }
 
     @Override

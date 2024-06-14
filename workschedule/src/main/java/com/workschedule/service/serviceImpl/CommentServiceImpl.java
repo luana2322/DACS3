@@ -2,7 +2,6 @@ package com.workschedule.service.serviceImpl;
 
 import com.workschedule.Exception.ResourceNotFoundException;
 import com.workschedule.model.Comment;
-import com.workschedule.model.Conversation;
 import com.workschedule.repository.CommentRepository;
 import com.workschedule.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;

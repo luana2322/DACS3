@@ -1,6 +1,5 @@
 package com.workschedule.repository;
 
-import com.workschedule.model.Conversation;
 import com.workschedule.model.Note;
 import com.workschedule.model.Project;
 import org.springframework.data.jpa.repository.JpaRepository;

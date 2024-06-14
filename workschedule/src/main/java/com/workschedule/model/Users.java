@@ -45,10 +45,10 @@ public class Users implements UserDetails {
 //    private Department department;
 
 
-    @OneToOne(mappedBy = "user",
-            cascade = {CascadeType.ALL}
-    )
-    private Participant participant_id;
+//    @OneToOne(mappedBy = "user",
+//            cascade = {CascadeType.ALL}
+//    )
+//    private Participant participant_id;
     @OneToMany(
             mappedBy = "users"
     )

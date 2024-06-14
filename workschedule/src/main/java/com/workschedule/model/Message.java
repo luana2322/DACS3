@@ -14,6 +14,7 @@ import java.util.List;
         name = "message"
 )
 @ToString
+@Builder
 public class Message {
     @Id
     @GeneratedValue(
@@ -27,27 +28,55 @@ public class Message {
     private String message;
     private String receiverName;
     private String date;
-    private Status status;
-    private Date created_At;
-    private Date updated_At;
+
+    private MessageType type;
+    public enum MessageType {
+        CHAT, LEAVE, JOIN
+    }
+
     @OneToMany(
             mappedBy = "message"
     )
     private List<Attachment> attachmentList;
+
     @ManyToOne(
             fetch = FetchType.EAGER
     )
     @JoinColumn(
-            name = "conversation_id",
-            referencedColumnName = "conversation_id"
+            name = "user_project_id",
+            referencedColumnName = "user_project_id"
     )
-    private Conversation conversation;
-    @ManyToOne(
-            fetch = FetchType.EAGER
-    )
-    @JoinColumn(
-            name = "participant_id",
-            referencedColumnName = "participant_id"
-    )
-    private Participant participant;
+    private User_Project userProject;
+
+
+    @Transient // Đánh dấu thuộc tính này không được lưu trong database
+    private Long userId; // Thêm thuộc tính userId
+
+//    @ManyToOne(
+//            fetch = FetchType.EAGER
+//    )
+//    @JoinColumn(
+//            name = "user_id",
+//            referencedColumnName = "user_id"
+//    )
+//    private Users users;
+
+
+
+//    @ManyToOne(
+//            fetch = FetchType.EAGER
+//    )
+//    @JoinColumn(
+//            name = "conversation_id",
+//            referencedColumnName = "conversation_id"
+//    )
+//    private Conversation conversation;
+//    @ManyToOne(
+//            fetch = FetchType.EAGER
+//    )
+//    @JoinColumn(
+//            name = "participant_id",
+//            referencedColumnName = "participant_id"
+//    )
+//    private Participant participant;
 }

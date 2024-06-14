@@ -1,6 +1,5 @@
 package com.workschedule.controller;
 
-import com.workschedule.model.Conversation;
 import com.workschedule.model.Message;
 import com.workschedule.service.serviceImpl.MessageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +20,6 @@ public class MessageController {
     }
 
 
-    @GetMapping("/getallmessage")
-    public ResponseEntity<List<Message>> getallconversation() {
-        return ResponseEntity.ok(messageServiceImpl.findAll());
-    }
 
     @GetMapping("/deletemessage")
     public ResponseEntity<Void> deleteconversation(@RequestParam("messageid") Long messageid) {

@@ -62,7 +62,7 @@ private UserProjectRepository userProjectRepository;
 
     @GetMapping("/findroleinuspr")
     public ResponseEntity<User_Project> findroleinuspr(@RequestParam("projectId") String projectId
-            , @RequestParam("userId") Long userId) {
+                                                        , @RequestParam("userId") Long userId) {
         User_Project uspr=userProjectRepository.findUserProjectByUserAndProject(userId,projectId).get();
         uspr.getProject().setUserProjectList(null);
         uspr.getUsers().setUserProjectList(null);
